@@ -1,11 +1,11 @@
-struct footballer {												/* For each footballer there is a struct.*/
+struct footballer {				/* For each footballer there is a struct.*/
     char f_name[100];
     char team_name[100];
     struct match * next_match;
     struct footballer * next_footballer;
 };
 
-struct match {													/* For each match of given footballer there is a struct.*/
+struct match {					/* For each match of given footballer there is a struct.*/
 	struct match * prev;
     char away_team[100];
     int min_of_goal;
@@ -13,7 +13,7 @@ struct match {													/* For each match of given footballer there is a stru
     struct match * next;
 };
 
-struct goal_score {												/* Holds given footballer's name, team and score count.*/
+struct goal_score {				/* Holds given footballer's name, team and score count.*/
 	char scorer_name[100];
 	char scorer_team[100];
 	int score_count;
@@ -101,7 +101,7 @@ namespace {
 
 
 
-void split(const string& s, char c, vector<string>& v) {				/* The function for splitting the strings by ','.*/
+void split(const string& s, char c, vector<string>& v) {		/* The function for splitting the strings by ','.*/
    string::size_type i = 0;
    string::size_type j = s.find(c);
 
@@ -136,7 +136,7 @@ void append_to_list(struct footballer** head_ref_footballer, char* new_f_name, c
     new_footballer->next_footballer = NULL; 
      
 
-    while (last_footballer->next_footballer != NULL){							/* For finding the last footballer of the linked list.*/
+    while (last_footballer->next_footballer != NULL){			/* For finding the last footballer of the linked list.*/
         last_footballer = last_footballer->next_footballer; 
   	}
 	
@@ -149,14 +149,14 @@ void append_to_list(struct footballer** head_ref_footballer, char* new_f_name, c
 
 	}
 
-	else if (cont == 1){ 							/* If the footballer already exists, then add the match values.*/
+	else if (cont == 1){ 					/* If the footballer already exists, then add the match values.*/
 	
 	struct match* new_match = new match();
 	
 	struct footballer* dumb_head_footballer = (*head_ref_footballer); 
 
 
-	while(string(dumb_head_footballer->f_name) != string(new_f_name)){		/* For finding the given footballer on the linked list.*/
+	while(string(dumb_head_footballer->f_name) != string(new_f_name)){	/* For finding the given footballer on the linked list.*/
 		
 		dumb_head_footballer = dumb_head_footballer->next_footballer;
 		
@@ -164,7 +164,7 @@ void append_to_list(struct footballer** head_ref_footballer, char* new_f_name, c
 
 	struct match* last_match = dumb_head_footballer->next_match;
 	
-	while(last_match->next != NULL){				/* For finding the last match of the given footballer.*/
+	while(last_match->next != NULL){		/* For finding the last match of the given footballer.*/
 		last_match = last_match->next;
 	}
 
@@ -205,18 +205,18 @@ void create_head(struct footballer** head_ref_footballer, char* new_f_name, char
 
 
 
-void matches_of_footballers(ofstream &output, struct footballer** head_ref_footballer, char input[]){		/* Searchs for the given footballer's match informations.*/
+void matches_of_footballers(ofstream &output, struct footballer** head_ref_footballer, char input[]){	/* Searchs for the given footballer's match informations.*/
 	
 	struct footballer* temp_pointer_footballer = *head_ref_footballer; 
 
-	for( ; temp_pointer_footballer ; temp_pointer_footballer = temp_pointer_footballer->next_footballer){		/* Iterate over the footbalers.*/
-		if (string(temp_pointer_footballer->f_name) == string(input)){				/* Given footballer's name is found.*/
+	for( ; temp_pointer_footballer ; temp_pointer_footballer = temp_pointer_footballer->next_footballer){	/* Iterate over the footbalers.*/
+		if (string(temp_pointer_footballer->f_name) == string(input)){		/* Given footballer's name is found.*/
 			
 			output << "Matches of "<< temp_pointer_footballer->f_name <<'\n';
 			
 			struct match* temp_pointer_match = temp_pointer_footballer->next_match; 
 			
-			for( ; temp_pointer_match ; temp_pointer_match = temp_pointer_match->next){				/* Iterate over the given footballer's matches.*/
+			for( ; temp_pointer_match ; temp_pointer_match = temp_pointer_match->next){	/* Iterate over the given footballer's matches.*/
 		
 					output << "Footballer Name: "<<temp_pointer_footballer->f_name<<",Away Team: "<<temp_pointer_match->away_team<<",Min of Goal: "<<temp_pointer_match->min_of_goal<<",Match ID: "<<temp_pointer_match->match_id<<'\n';
 			}
@@ -230,7 +230,7 @@ void matches_of_footballers(ofstream &output, struct footballer** head_ref_footb
 }
 
 
-void team_list(ofstream &output, struct footballer** head_ref_footballer){		/* For printing the whole team list.*/
+void team_list(ofstream &output, struct footballer** head_ref_footballer){	/* For printing the whole team list.*/
 	
 	struct footballer* temp_pointer_footballer = *head_ref_footballer; 
 	
@@ -243,7 +243,7 @@ void team_list(ofstream &output, struct footballer** head_ref_footballer){		/* F
 				/* Don't push the current team name to the team_array vector.*/
 		}
 		else{
-			team_array.push_back (temp_pointer_footballer->team_name);		/* If the current team name is coming for the first time.*/
+			team_array.push_back (temp_pointer_footballer->team_name);	/* If the current team name is coming for the first time.*/
 		}																	/* Add the current team name to the team_array vector.*/
 		
 	}
@@ -254,12 +254,12 @@ void team_list(ofstream &output, struct footballer** head_ref_footballer){		/* F
 
 
 
-int order_match(ofstream &output, struct footballer** head_ref_footballer, char input[], int parameter){		/* Prints the given footballer's matches in ascending order or descending order.*/
+int order_match(ofstream &output, struct footballer** head_ref_footballer, char input[], int parameter){	/* Prints the given footballer's matches in ascending order or descending order.*/
 	
 	struct footballer* temp_pointer_footballer = *head_ref_footballer; 
 
 		
-	for( ; temp_pointer_footballer ; temp_pointer_footballer = temp_pointer_footballer->next_footballer){		/* Iterate over the footbalers.*/
+	for( ; temp_pointer_footballer ; temp_pointer_footballer = temp_pointer_footballer->next_footballer){	/* Iterate over the footbalers.*/
 	
 		struct match* temp_pointer_match = temp_pointer_footballer->next_match; 
 
@@ -299,13 +299,13 @@ int order_match(ofstream &output, struct footballer** head_ref_footballer, char 
 						
 							
 			}	
-			if (parameter == 0){									/* For ascending order.*/
+			if (parameter == 0){				/* For ascending order.*/
 				std::sort(match_id_array, match_id_array+(i));
 			}
 			else if(parameter == 1){															/* For descending order.*/
 				std::sort(match_id_array, match_id_array+(i), greater<int>());
 			}
-			if (parameter != 2){					/* For ascending order or descending order.*/
+			if (parameter != 2){			/* For ascending order or descending order.*/
 			
 				for(int t = 0; t<i; t++){
 					output << "footballer Name: "<<temp_pointer_footballer->f_name<<",Match ID: "<<match_id_array[t]<<'\n';
@@ -334,12 +334,12 @@ int order_match(ofstream &output, struct footballer** head_ref_footballer, char 
 int main(int argc, char** argv){
 	
 
-	struct footballer *head_of_footballer = NULL ;   		/* Start with empty list.*/
+	struct footballer *head_of_footballer = NULL ;   	/* Start with empty list.*/
 
   	string line;
   	ifstream myfile (argv[1]);			
   	ofstream output (argv[3]);
-	vector<string> lines;						/* Creates a string vector for holding the lines of the input file.*/
+	vector<string> lines;		/* Creates a string vector for holding the lines of the input file.*/
 	
   	if (myfile.is_open()){			/* If first file can open.*/
 	
@@ -348,7 +348,7 @@ int main(int argc, char** argv){
 	  	int counter_for_first_half = 0;
 		int counter_for_second_half = 0;
 		
-  		while ( getline (myfile,line) ){		/* For assigning the lines from the input file to the string vector.*/  
+  		while ( getline (myfile,line) ){	/* For assigning the lines from the input file to the string vector.*/  
   			lines.push_back(line);
   			x++;
 		}	
@@ -381,11 +381,11 @@ int main(int argc, char** argv){
 			char team[100];
 			char away[100];
   	
-  		 	strcpy(name, v[0].c_str());						/* Assigns the footballer's name to name char array.*/
-  		 	strcpy(team , v[1].c_str());					/* Assigns the footballer's team name to team char array.*/
-  		 	strcpy(away , v[2].c_str());					/* Assigns the footballer's away team name to away char array.*/
-		    sscanf(v[3].c_str(), "%d", &min);				/* Converts the min of goal value to integer and assigns it to integer min.*/
-		    sscanf(v[4].c_str(), "%d", &id);				/* Converts the match id value to integer and assigns it to integer id.*/
+  		 	strcpy(name, v[0].c_str());			/* Assigns the footballer's name to name char array.*/
+  		 	strcpy(team , v[1].c_str());			/* Assigns the footballer's team name to team char array.*/
+  		 	strcpy(away , v[2].c_str());			/* Assigns the footballer's away team name to away char array.*/
+		    sscanf(v[3].c_str(), "%d", &min);			/* Converts the min of goal value to integer and assigns it to integer min.*/
+		    sscanf(v[4].c_str(), "%d", &id);			/* Converts the match id value to integer and assigns it to integer id.*/
 	
 			if (y == 0){									/* If first footballer comes.*/
 				
